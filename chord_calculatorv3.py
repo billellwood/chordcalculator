@@ -1,17 +1,14 @@
-import itertools
+from itertools import permutations
 import tkinter as tk
-import os
-from PIL import ImageTk, Image
-os.chdir("/Users/billellwood/Desktop")
+
 
 notes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A",
          "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A"]
 
 def convert_notes_to_intervals(input_notes):
 
-    new = list(itertools.permutations(input_notes))
+    new = list(permutations(input_notes))
     nl = [[] for i in new]
-    
     for i in new:
         for j in i:
             if notes.index(j) < notes.index(i[0]):
@@ -19,7 +16,6 @@ def convert_notes_to_intervals(input_notes):
             else:
                 nl[new.index(i)].append(notes.index(j))
     return nl
-    #i.e. = [0,4,7] instead of ["C", "E", "G"]
 
 class Diads:
     def __init__(self, input_notes):
@@ -30,44 +26,29 @@ class Diads:
         chords = []
         for i in self.perms:
             if i[1] - i[0] == 2: 
-                chords.append("{} Sus (Major/Minor) 2nd".format(notes.i[0]))
-                
+                chords.append("{} Major 2nd".format(notes.i[0]))     
             if i[1] - i[0] == 4:
-                chords.append("{} Major 3rd".format(notes[i[0]]))
-                
+                chords.append("{} Major 3rd".format(notes[i[0]]))    
             if i[1] - i[0] == 9:
-                chords.append("{} Major 6nd".format(notes.i[0]))
-                
+                chords.append("{} Major 6nd".format(notes.i[0]))     
             if i[1] - i[0] == 11:
                 chords.append("{} Major 7th".format(notes[i[0]]))                
-
             if i[1] - i[0] == 3:
                 chords.append("{} Minor 3rd".format(notes[i[0]]))
- 
             if i[1] - i[0] == 8:
-                chords.append("{} Minor 6nd".format(notes.i[0]))
-                
+                chords.append("{} Minor 6th".format(notes.i[0]))      
             if i[1] - i[0] == 10:
-                chords.append("{} Minor 7th".format(notes[i[0]]))  
-                
+                chords.append("{} Minor 7th".format(notes[i[0]]))         
             if i[1] - i[0]== 5:
                 chords.append("{} Perfect 4".format(notes[i[0]]))
-                
             if i[1] - i[0] == 7:
-                chords.append("{} Perfect 5".format(notes[i[0]]))
-                
+                chords.append("{} Perfect 5".format(notes[i[0]]))  
             if i[1] - i[0] == 4:  
-                chords.append("{} Diminished 4".format(notes[i[0]]))
-                
-            if i[1] - i[0] == 6:
-                chords.append("{} Augmented 4".format(notes[i[0]]))                 
-
+                chords.append("{} Diminished 4".format(notes[i[0]])) 
             if i[1] - i[0] == 6:  
                 chords.append("{} Diminished 5".format(notes[i[0]]))
-                
-            if i[1] - i[0] == 8:
-                chords.append("{} Augmented 5".format(notes[i[0]])) 
-
+            if i[1] - i[0] == 6:
+                chords.append("{} Augmented 4".format(notes[i[0]]))                 
         return chords
                 
 class Triads:   
@@ -80,34 +61,24 @@ class Triads:
         for i in self.perms:
             if i[1] - i[0] == 4 and i[2] - i[0] == 7:
                 chords.append("{} Major".format(notes[i[0]]))
-             
             if i[1] - i[0] == 3 and i[2] - i[0] == 7:
                 chords.append("{} Minor".format(notes[i[0]]))
-                
             if i[1] - i[0] == 4 and i[2] - i[0] == 9:
                 chords.append("{} Major 6".format(notes[i[0]]))
-         
             if i[1] - i[0] == 3 and i[2] - i[0] == 8:
                 chords.append("{} Minor 6".format(notes[i[0]]))
-                
             if i[1] - i[0] == 4 and i[2] - i[0] == 11:
                 chords.append("{} Major 7".format(notes[i[0]]))
-         
             if i[1] - i[0] == 3 and i[2] - i[0] == 10:
                 chords.append("{} Minor 7".format(notes[i[0]]))
-
             if i[1] - i[0] == 3 and i[2] - i[0] == 6:
                 chords.append("{} Diminished".format(notes[i[0]]))
-
             if i[1] - i[0] == 4 and i[2] - i[0] == 10:
                 chords.append("{} Dominant".format(notes[i[0]]))
-
             if i[1] - i[0] == 4 and i[2] - i[0] == 8:
                 chords.append("{} Augmented".format(notes[i[0]]))
-
             if i[1] - i[0] == 2 and i[2] - i[0] == 7:
-                chords.append("{} Sus2".format(notes[i[0]]))
-                
+                chords.append("{} Sus2".format(notes[i[0]]))      
             if i[1] - i[0] == 5 and i[2] - i[0] == 7:
                 chords.append("{} Sus4".format(notes[i[0]]))
         return chords
@@ -126,6 +97,9 @@ class Tetrads:
             if i[1] - i[0] == 4 and i[2] - i[0] == 7 and i[3] - i[0] == 11:
                 chords.append("{} Major 7".format(notes[i[0]]))
                 
+            if i[1] - i[0] == 3 and i[2] - i[0] == 7 and i[3] - i[0] == 9:
+                chords.append("{} Minor 6".format(notes[i[0]]))  
+                
             if i[1] - i[0] == 3 and i[2] - i[0] == 7 and i[3] - i[0] == 10:
                 chords.append("{} Minor 7".format(notes[i[0]])) 
                 
@@ -141,17 +115,17 @@ class Tetrads:
             if i[1] - i[0] == 3 and i[2] - i[0] == 10 and i[3] - i[0] == 2:
                 chords.append("{} Minor 9".format(notes[i[0]]))
      
-            if i[1] - i[0] == 6 and i[2] - i[0] == 10 and i[3] - i[0] == 3:
+            if i[1] - i[0] == 3 and i[2] - i[0] == 6 and i[3] - i[0] == 9:
                 chords.append("{} Diminished 7".format(notes[i[0]]))
            
-            if i[1] - i[0] == 5 and i[2] - i[0] == 10 and i[3] - i[0] == 3:
+            if i[1] - i[0] == 3 and i[2] - i[0] == 6 and i[3] - i[0] == 10:
                 chords.append("{} Half Diminished".format(notes[i[0]]))
       
             if i[1] - i[0] == 9 and i[2] - i[0] == 4 and i[3] - i[0] == 7:
                 chords.append("{} 6th".format(notes[i[0]]))
 
             if i[1] - i[0] == 3 and i[2] - i[0] == 7 and i[3] - i[0] == 11:
-                chords.append("{} 6min(maj7)".format(notes[i[0]]))
+                chords.append("{} min(maj7)".format(notes[i[0]]))
      
             if i[1] - i[0] == 4 and i[2] - i[0] == 7 and i[3] - i[0] == 2:
                 chords.append("{} add2".format(notes[i[0]]))
@@ -159,6 +133,8 @@ class Tetrads:
             if i[1] - i[0] == 3 and i[2] - i[0] == 7 and i[3] - i[0] == 2:
                 chords.append("{} madd2".format(notes[i[0]]))
 
+            if i[1] - i[0] == 4 and i[2] - i[0] == 6 and i[3] - i[0] == 10:
+                chords.append("{} Dom7b5".format(notes[i[0]]))
         return chords
 
 
@@ -203,11 +179,18 @@ def running_chord_calculator():
             return print(i)
     
     if len(answer) > 1:
-        print("Looks like your chords are:")
         for i in answer:
-            return print(i)
+            if answer.index(i) == 0:
+                print("The likely chord is: \n{}".format(i))
+                print("But the following chords match too:")
+            else:
+                print(i)
+
+                
+
    
-   
+
+
     
 window = tk.Tk()
 
@@ -225,24 +208,15 @@ btn = tk.Button(master=window,text = "Enter notes",
 
 lbl_result = tk.Label(master = window, text = input_notes) 
 
-my_pic = Image.open("fretboard.png")
-resized = my_pic.resize((808,236), Image.ANTIALIAS) 
-my_pic = ImageTk.PhotoImage(resized)
-
-my_pic_label = tk.Label(window, image =  my_pic)
-    
 frm_entry.grid(row=0,column=0,padx=10)
 instructions.grid(row=0,column=0)
 user_input.grid(row=1,column=0)
 btn.grid(row=2, column=0, pady=10)
-lbl_result.grid(row=3, column=0, padx=10)
-my_pic_label.grid(row=4,column=0)
+lbl_result.grid(row=5, column=0, padx=10)
 
      
 window.mainloop()
-     
-     
-    
+      
 
    
     
